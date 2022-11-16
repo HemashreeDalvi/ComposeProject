@@ -9,7 +9,14 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -35,22 +42,43 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(name: String) {
     Surface(color = Color.Cyan) {
-        Text(text = "Hello $name!", modifier = Modifier.padding(5.dp))
+        //Text(text = "Hello $name!", modifier = Modifier.padding(5.dp))
+        BirthdayWish("Happy Birthday Nirvi", "from Aai Baba")
     }
 }
 
 @Composable
 fun BirthdayWish(msg: String, from: String) {
     Column {
-        Text(text = "$msg", fontSize = 14.sp)
-        Text(text = "$from", fontSize = 10.sp)
+        //Text(text = "$msg", fontSize = 14.sp, fontStyle = FontStyle.Italic)
+        TextShadow(txt = msg)
+        Text(text = "$from", fontSize = 7.sp, textAlign = TextAlign.Right, fontWeight = FontWeight.Bold, modifier = Modifier.width(150.dp))
+        Text(stringResource(R.string.app_name) , color = Color.Red)
     }
 }
 
 @Preview(showBackground = true)
 @Composable
+fun TextShadow(txt : String) {
+    val offset = Offset(5.0f, 10.0f)
+    Text(
+        text = txt,
+        style = TextStyle(
+            fontSize = 14.sp,
+            shadow = Shadow(
+                color = Color.Blue,
+                offset = offset,
+                blurRadius = 3f
+            )
+        )
+    )
+}
+
+@Preview//(showBackground = true)
+@Composable
 fun DefaultPreview() {
     MyComposeDemoTheme {
-        BirthdayWish("Happy Birthday Nirvi", "from Aai Baba")
+//        BirthdayWish("Happy Birthday Nirvi", "from Aai Baba")
+        Greeting("test")
     }
 }
