@@ -3,10 +3,7 @@ package com.hem.mycomposedemo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -44,13 +41,16 @@ fun Greeting(name: String) {
 
 @Composable
 fun BirthdayWish(msg: String, from: String) {
-    Text(text = "$msg", fontSize = 14.sp)
+    Column {
+        Text(text = "$msg", fontSize = 14.sp)
+        Text(text = "$from", fontSize = 10.sp)
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     MyComposeDemoTheme {
-        Greeting("Nirvi")
+        BirthdayWish("Happy Birthday Nirvi", "from Aai Baba")
     }
 }
