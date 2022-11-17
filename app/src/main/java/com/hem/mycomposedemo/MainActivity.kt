@@ -3,6 +3,7 @@ package com.hem.mycomposedemo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -12,6 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
@@ -29,8 +32,8 @@ class MainActivity : ComponentActivity() {
             MyComposeDemoTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    modifier = Modifier.fillMaxSize()
+                    //, color = MaterialTheme.colors.background
                 ) {
                     Greeting("Nirvi")
                 }
@@ -41,7 +44,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String) {
-    Surface(color = Color.Cyan) {
+    Surface(color = MaterialTheme.colors.background) {
         //Text(text = "Hello $name!", modifier = Modifier.padding(5.dp))
         BirthdayWish("Happy Birthday Nirvi", "from Aai Baba")
     }
@@ -49,12 +52,30 @@ fun Greeting(name: String) {
 
 @Composable
 fun BirthdayWish(msg: String, from: String) {
-    Column {
-        //Text(text = "$msg", fontSize = 14.sp, fontStyle = FontStyle.Italic)
-        TextShadow(txt = msg)
-        Text(text = "$from", fontSize = 7.sp, textAlign = TextAlign.Right, fontWeight = FontWeight.Bold, modifier = Modifier.width(150.dp))
-        Text(stringResource(R.string.app_name) , color = Color.Red)
+    Box {
+        BirthdayWishImage()
+        Column {
+            //Text(text = "$msg", fontSize = 14.sp, fontStyle = FontStyle.Italic)
+            TextShadow(txt = msg)
+            Text(
+                text = "$from",
+                fontSize = 7.sp,
+                textAlign = TextAlign.Right,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.width(150.dp)
+            )
+            //Text(stringResource(R.string.app_name), color = Color.Red)
+        }
     }
+}
+
+@Composable
+fun BirthdayWishImage(){
+    val birthdayImage = painterResource(id = R.drawable.androidparty)
+    Image(painter = birthdayImage, contentDescription = null
+        , modifier = Modifier.fillMaxHeight().fillMaxWidth()
+    , contentScale = ContentScale.Crop)
+
 }
 
 @Preview(showBackground = true)
